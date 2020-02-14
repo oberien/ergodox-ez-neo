@@ -6,23 +6,51 @@ This is an implementation of the German [neo-layout](https://neo-layout.org/) fo
 
 Neo:
 
-* no userland neo layout required
-* supports Caps-Lock via pressing both `Shift` keys at the same time
-* supports Unicode (neo layers 5/6) on Linux via ibus
+- [x] no userland neo layout required
+- [x] supports Caps-Lock via pressing both `Shift` keys at the same time
+- [x] supports Unicode (neo layers 5/6) on Linux via ibus
+- [ ] on layer 5 writes capital Greek letters if CapsLock is active
+- [ ] switch for supporting userland `de` and `us` keyboard layouts (currently `de` required)
 
-QWERTZ:
+QWERTZ / QWERTY:
 
-* qwertz for gaming such that key remapping isn't required for each game
+- [ ] qwertz for gaming such that key remapping isn't required for each game
+- [ ] qwerty as option if userland has `us` keyboard layout
 
 Steno / Plover:
 
-* enables N-Key-RollOver (NKRO)
-* has a layer for English stenography
-* requires userland-driver `Plover`
-* uses TX Bolt protocol for English
-* possibly support for both English and German (German via GeminiPR?)
+- [ ] enables N-Key-RollOver (NKRO)
+- [ ] layer for English stenography
+    * requires userland-driver `Plover`
+    * uses TX Bolt protocol for English
+- [ ] support for both English and German (German via GeminiPR?)
 * (onboard translation not possible due to very small flash of the keyboard)
 
+# Build
+
+1. Install an environment for AVR or/and ARM development as described in <https://docs.qmk.fm/>.
+1. Clone the Ergodox EZ fork of qmk_firmware by zsa, making sure to also fetch submodules (`--recurse-submodules`) from <https://github.com/zsa/qmk_firmware/>.
+1. Copy this repository's `src` folder to `qmk_firmware/keyboards/ergodox_ez/keymaps/neo-oberien`.
+1. Change directory to `qmk_firmware`.
+1. Setup QMK's environment by following the instructions at <https://docs.qmk.fm/#/newbs_getting_started?id=set-up-your-environment>.
+1. Test that the environment is completely set up by running `make ergodox_ez:default`.
+1. Actually build this repository's firmware by running `make ergodox_ez:neo-oberien`.
+1. Install and set up the flash tool by following its guide at <https://ergodox-ez.com/pages/wally>.
+1. Flash the firmware
+
+On Arch Linux:
+
+```sh
+pacman -S base-devel gcc unzip wget zip avr-gcc avr-binutils avr-libc dfu-util arm-none-eabi-gcc arm-none-eabi-binutils arm-none-eabi-newlib git dfu-programmer dfu-util
+git clone https://github.com/zsa/qmk_firmware/
+cp -r src qmk_firmware/keyboards/ergodox_ez/keymaps/neo-oberien
+cd qmk_firmware
+sh util/qmk_install.sh
+make ergodox_ez:default
+make ergodox_ez:neo-oberien
+pikaur -S zsa-wally
+zsa-wally
+```
 
 # Related Work
 
