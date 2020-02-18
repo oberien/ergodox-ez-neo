@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 #include "keymap_german.h"
+#include "keymap_steno.h"
 
 #define KC_MAC_UNDO LGUI(KC_Z)
 #define KC_MAC_CUT LGUI(KC_X)
@@ -36,7 +37,7 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Layer 0: Neo1
 // ┌───────┬─────┬─────┬─────┬─────┬─────┬─────┐     ┌─────┬─────┬─────┬─────┬─────┬─────┬───────┐
-// │  ---  │  1  │  2  │  3  │  4  │  5  │ --- │     │ --- │  6  │  7  │  8  │  9  │  0  │   -   │
+// │  ---  │  1  │  2  │  3  │  4  │  5  │STENO│     │ --- │  6  │  7  │  8  │  9  │  0  │   -   │
 // ├───────┼─────┼─────┼─────┼─────┼─────┼─────┤     ├─────┼─────┼─────┼─────┼─────┼─────┼───────┤
 // │   ⇥   │  X  │  V  │  L  │  C  │  W  │ --- │     │ --- │  K  │  H  │  G  │  F  │  Q  │   ß   │
 // ├───────┼─────┼─────┼─────╆─────╅─────┤     │     │     ├─────╆─────╅─────┼─────┼─────┼───────┤
@@ -53,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                             │Neo4 │     │ --- │ │ --- │     │ Neo4│
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [NEO1] = LAYOUT_ergodox(
-    KC_NO,                KC_1,  KC_2,  KC_3,  KC_4, KC_5, KC_NO,
+    KC_NO,                KC_1,  KC_2,  KC_3,  KC_4, KC_5, TG(STENO),
     KC_TAB,               KC_X,  KC_V,  KC_L,  KC_C, KC_W, KC_NO,
     MO(NEO3),             KC_U,  KC_I,  KC_A,  KC_E, KC_O,
     LM(NEO2_1, MOD_LSFT), DE_UE, DE_OE, DE_AE, KC_P, KC_Z, KC_NO,
@@ -292,6 +293,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANS,
     KC_TRANS, KC_TRANS, KC_TRANS,
   ),
+// Layer 9: Steno
+// ┌───────┬─────┬─────┬─────┬─────┬─────┬─────┐     ┌─────┬─────┬─────┬─────┬─────┬─────┬───────┐
+// │   #   │  #  │  #  │  #  │  #  │  #  │STENO│     │ --- │  #  │  #  │  #  │  #  │  #  │   #   │
+// ├───────┼─────┼─────┼─────┼─────┼─────┼─────┤     ├─────┼─────┼─────┼─────┼─────┼─────┼───────┤
+// │  FN   │  S  │  T  │  P  │  H  │  *  │ --- │     │ --- │  *  │  F  │  P  │  L  │  T  │   D   │
+// ├───────┼─────┼─────┼─────╆─────╅─────┤     │     │     ├─────╆─────╅─────┼─────┼─────┼───────┤
+// │  ---  │  S  │  K  │  W  │  R  │  *  ├─────┤     ├─────┤  *  │  R  │  B  │  G  │  S  │   Z   │
+// ├───────┼─────┼─────┼─────╄─────╃─────┤ --- │     │ --- ├─────╄─────╃─────┼─────┼─────┼───────┤
+// │  ---  │ --- │ --- │ --- │ --- │ --- │     │     │     │ --- │ --- │ --- │ --- │ --- │  ---  │
+// └─┬─────┼─────┼─────┼─────┼─────┼─────┴─────┘     └─────┴─────┼─────┼─────┼─────┼─────┼─────┬─┘
+//   │ --- │ --- │ --- │ --- │ --- │                             │ --- │ --- │ --- │ --- │ --- │
+//   └─────┴─────┴─────┴─────┴─────┘ ┌─────┬─────┐ ┌─────┬─────┐ └─────┴─────┴─────┴─────┴─────┘
+//                                   │ --- │ --- │ │ --- │ --- │
+//                             ┌─────┼─────┼─────┤ ├─────┼─────┼─────┐
+//                             │     │     │ --- │ │ --- │     │     │
+//                             │  A  │  O  ├─────┤ ├─────┤  E  │  U  │
+//                             │     │     │ --- │ │ --- │     │     │
+//                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
+  [STENO] = LAYOUT_ergodox(
+      STN_N1, STN_N2, STN_N3, STN_N4, STN_N5, STN_N6,  KC_TRANS,
+      STN_FN, STN_S1, STN_TL, STN_PL, STN_HL, STN_ST1, KC_NO
+      KC_NO,  STN_S2, STN_KL, STN_WL, STN_RL, STN_ST2,
+      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,   KC_NO,
+      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+      KC_NO, KC_NO,
+      KC_NO,
+      STN_A, STN_O, KC_NO,
+      
+      KC_NO, STN_N7,  STN_N8, STN_N9, STN_NA, STN_NB, STN_NC,
+      KC_NO, STN_ST3, STN_FR, STN_PR, STN_LR, STN_TR, STN_DR,
+             STN_ST4, STN_RR, STN_BR, STN_GR, STN_SR, STN_ZR,
+      KC_NO, KC_NO,   KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+      KC_NO, KC_NO,
+      KC_NO,
+      KC_NO, STN_E, STN_U,
+  ),
 // Layer X: XXX
 // ┌───────┬─────┬─────┬─────┬─────┬─────┬─────┐     ┌─────┬─────┬─────┬─────┬─────┬─────┬───────┐
 // │       │     │     │     │     │     │     │     │     │     │     │     │     │     │       │
@@ -317,6 +355,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Run only after EEPROM is reset to initialize it with default values.
 void eeconfig_init_user(void) {
     set_unicode_input_mode(UC_LNX);
+}
+
+// Run during firmware startup
+void matrix_init_user() {
+  steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
 }
 
 // Runs before the keycode is passed to the core.

@@ -7,3 +7,6 @@ WEBUSB_ENABLE = yes
 SRC = matrix.c
 RGBLIGHT_ENABLE = no
 RGB_MATRIX_ENABLE = yes
+# steno
+MOUSEKEY_ENABLE = no
+STENO_ENABLE = yes
