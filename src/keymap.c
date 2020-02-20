@@ -412,6 +412,36 @@ void set_hsv_layer_color(uint8_t hue, uint8_t sat, uint8_t val) {
   rgblight_sethsv(hue, sat, val);
 }
 
+// Runs every matrix scan
+void rgb_matrix_indicators_user(void) {
+  if (rgblight_disabled) {
+    return;
+  }
+  const uint8_t F_MEDIA_GREEN_KEYS[] = {0, 1, 2, 3, 4, 24, 25, 26, 27, 28};
+  const uint8_t F_MEDIA_SPRINGGREEN_KEYS[] = {11, 12, 13, 14, 30, 31, 32, 35, 36, 37, 40};
+  const uint8_t STENO_COLORED_KEYS[] = {
+    5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+    29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43
+  };
+  uint8_t layer = biton32(layer_state);
+  switch (layer) {
+    case F_MEDIA:
+      for (int i = 0; i < sizeof(F_MEDIA_GREEN_KEYS); i++) {
+        rgb_matrix_set_color(F_MEDIA_GREEN_KEYS[i], RGB_GREEN);
+      }
+      for (int i = 0; i < sizeof(F_MEDIA_SPRINGGREEN_KEYS); i++) {
+        rgb_matrix_set_color(F_MEDIA_SPRINGGREEN_KEYS[i], RGB_SPRINGGREEN);
+      }
+      break;
+    case STENO:
+      for (int i = 0; i < sizeof(STENO_COLORED_KEYS); i++) {
+        rgb_matrix_set_color(STENO_COLORED_KEYS[i], RGB_MAGENTA);
+      }
+    default:
+      return;
+  }
+}
+
 void set_layer_matrix_colors(uint8_t layer) {
   if (rgblight_disabled) {
     set_hsv_layer_color(HSV_BLACK);
@@ -435,8 +465,14 @@ void set_layer_matrix_colors(uint8_t layer) {
     case NEO6:
       set_hsv_layer_color(HSV_RED);
       break;
-    default:
+    case QWERTZ:
+    case QWERTY:
       set_hsv_layer_color(HSV_WHITE);
+      break;
+    case F_MEDIA:
+    case STENO:
+      set_hsv_layer_color(HSV_BLACK);
+      break;
   }
 }
 

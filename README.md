@@ -9,7 +9,10 @@ Neo:
 - [x] no userland neo layout required
 - [x] supports Caps-Lock via pressing both `Shift` keys at the same time
 - [x] supports Unicode (neo layers 5/6) on Linux via ibus
-* [x]
+- [x] keypad on Layer 4 sends keypad keycodes
+* [x] Num-Lock is always enabled 
+    * if it is disabled, it'll be enabled again by sending a Num-Lock key press
+    * required by neo layer 4 keypad
 - [ ] on layer 5 writes capital Greek letters if CapsLock is active
 - [ ] switch for supporting userland `de` and `us` keyboard layouts (currently `de` required)
 
@@ -26,16 +29,16 @@ Steno / Plover:
 - [ ] support for both English and German (English via TX Bolt and German via GeminiPR?)
 * (onboard translation not possible due to very small flash of the keyboard)
 
-RGB Matrix / Lighting:
-
-* [x] different RGB light per layer
-* [ ] for the F-Media and Steno layers only light up used keys
-* [ ] Add special lighting for qwertz / qwerty
-
 Others:
 
 * F1-F12 Keys, Media Keys and Mouse Keys on extra layer
 * NKRO enabled
+
+RGB Matrix / Lighting:
+
+* [x] different RGB light per layer
+* [x] for the F-Media and Steno layers only light up used keys
+* [ ] add special lighting for qwertz / qwerty
 
 # Build
 
