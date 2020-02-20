@@ -22,6 +22,7 @@ enum layers {
 
 enum custom_keycodes {
   TGL_RGB = SAFE_RANGE,
+  LT_NEO4_ENTER,
 };
 
 bool rgblight_disabled = false;
@@ -42,8 +43,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                   │  ↑  │  ↓  │ │  ←  │  →  │
 //                             ┌─────┼─────┼─────┤ ├─────┼─────┼─────┐
 //                             │     │     │ --- │ │ --- │     │     │
-//                             │SPC/ │Media├─────┤ ├─────┤Media│ ENT/│
-//                             │Neo4 │     │ --- │ │ --- │     │ Neo4│
+//                             │ SPC │Media├─────┤ ├─────┤Media│ ENT/│
+//                             │     │     │ --- │ │ --- │     │ Neo4│
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [NEO1] = LAYOUT_ergodox(
     KC_NO,                KC_1,  KC_2,  KC_3,  KC_4, KC_5, TO(STENO),
@@ -53,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCTL, KC_LGUI, KC_LALT, KC_NO, KC_NO,
     KC_UP, KC_DOWN,
     KC_NO,
-    LT(NEO4, KC_SPC), MO(F_MEDIA), KC_PSCR,
+    KC_SPC, MO(F_MEDIA), KC_PSCR,
 
     TGL_RGB, KC_6, KC_7, KC_8,    KC_9,   KC_0, DE_MINS,
     KC_NO,   KC_K, KC_H, KC_G,    KC_F,   KC_Q, DE_SS,
@@ -62,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO, KC_NO, KC_RALT, KC_RGUI, KC_RCTL,
     KC_LEFT, KC_RIGHT,
     KC_NO,
-    KC_NO, MO(F_MEDIA), LT(NEO4, KC_ENTER)
+    KC_NO, MO(F_MEDIA), LT_NEO4_ENTER
   ),
 // Layer 1: Neo2_1 (Shifted by LShift)
 // ┌───────┬─────┬─────┬─────┬─────┬─────┬─────┐     ┌─────┬─────┬─────┬─────┬─────┬─────┬───────┐
@@ -412,7 +413,7 @@ void set_hsv_layer_color(uint8_t hue, uint8_t sat, uint8_t val) {
   rgblight_sethsv(hue, sat, val);
 }
 
-// Runs every matrix scan
+// Runs every matrix scan to configure rgb lighting
 void rgb_matrix_indicators_user(void) {
   if (rgblight_disabled) {
     return;
@@ -476,8 +477,42 @@ void set_layer_matrix_colors(uint8_t layer) {
   }
 }
 
+static uint16_t lt_neo4_timer;
+static bool anything_pressed_during_neo4;
+static bool is_neo4_pressed;
+
+// Runs every matrix scan
+void matrix_scan_user() {
+  if (is_neo4_pressed && !IS_LAYER_ON(NEO4) && timer_elapsed(lt_neo4_timer) >= TAPPING_TERM) {
+    layer_on(NEO4);
+  }
+}
+
 // Runs when a key is pressed before it is forwarded to qmk.
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+  // Change behavour of LT(NEO4, KC_ENTER) to make
+  // Down(LT), Down(6), Up(LT), Up(6) to register as 6.
+  // We needed a custom keycode for this to have perfect responsive lighting.
+  if (keycode == LT_NEO4_ENTER) {
+    if (record->event.pressed) {
+      lt_neo4_timer = timer_read();
+      anything_pressed_during_neo4 = false;
+      is_neo4_pressed = true;
+    } else {
+      layer_off(NEO4);
+      is_neo4_pressed = false;
+      if (!anything_pressed_during_neo4 && timer_elapsed(lt_neo4_timer) < TAPPING_TERM) {
+        tap_code(KC_ENTER);
+      }
+    }
+    return false;
+  } else {
+    if (is_neo4_pressed && record->event.pressed) {
+      layer_on(NEO4);
+      anything_pressed_during_neo4 = true;
+    }
+  }
+  
   switch (keycode) {
     case TGL_RGB:
       if (record->event.pressed) {
