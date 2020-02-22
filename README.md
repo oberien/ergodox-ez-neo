@@ -31,8 +31,9 @@ Steno / Plover:
 
 Others:
 
-* F1-F12 Keys, Media Keys and Mouse Keys on extra layer
-* NKRO enabled
+- [x] F1-F12 Keys, Media Keys and Mouse Keys on extra layer
+* [x] NKRO enabled
+* [ ] correct tri layers for neo layers 5/6
 
 RGB Matrix / Lighting:
 

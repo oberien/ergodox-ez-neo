@@ -51,10 +51,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,               KC_X,  KC_V,  KC_L,  KC_C, KC_W, KC_NO,
     MO(NEO3),             KC_U,  KC_I,  KC_A,  KC_E, KC_O,
     LM(NEO2_1, MOD_LSFT), DE_UE, DE_OE, DE_AE, KC_P, DE_Z, KC_NO,
-    KC_LCTL, KC_LGUI, KC_LALT, KC_NO, KC_NO,
+    KC_LCTL, KC_LGUI, KC_LALT, KC_NO, KC_PSCR,
     KC_UP, KC_DOWN,
     KC_NO,
-    KC_SPC, MO(F_MEDIA), KC_PSCR,
+    KC_SPC, MO(F_MEDIA), KC_NO,
 
     TGL_RGB, KC_6, KC_7, KC_8,    KC_9,   KC_0, DE_MINS,
     KC_NO,   KC_K, KC_H, KC_G,    KC_F,   KC_Q, DE_SS,
