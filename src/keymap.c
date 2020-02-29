@@ -161,34 +161,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ├───────┼─────┼─────┼─────╆─────╅─────┤     │     │     ├─────╆─────╅─────┼─────┼─────┼───────┤
 // │ XXXXX │  \  │  /  │  {  │  }  │  *  ├─────┤     ├─────┤  ?  │  (  │  )  │  -  │  :  │   @   │
 // ├───────┼─────┼─────┼─────╄─────╃─────┤ --- │     │ --- ├─────╄─────╃─────┼─────┼─────┼───────┤
-// │ Neo5  │  #  │  $  │  |  │  ~  │  `  │     │     │     │  +  │  %  │  "  │  '  │  ;  │  ---  │
+// │(Neo5) │  #  │  $  │  |  │  ~  │  `  │     │     │     │  +  │  %  │  "  │  '  │  ;  │ (Neo5)│
 // └─┬─────┼─────┼─────┼─────┼─────┼─────┴─────┘     └─────┴─────┼─────┼─────┼─────┼─────┼─────┬─┘
 //   │     │     │     │     │     │                             │     │     │     │     │     │
 //   └─────┴─────┴─────┴─────┴─────┘ ┌─────┬─────┐ ┌─────┬─────┐ └─────┴─────┴─────┴─────┴─────┘
 //                                   │     │     │ │     │     │
 //                             ┌─────┼─────┼─────┤ ├─────┼─────┼─────┐
 //                             │     │     │     │ │     │     │     │
-//                             │SPC/ │     ├─────┤ ├─────┤     │ ENT/│
-//                             │Neo6 │     │     │ │     │     │ Neo6│
+//                             │     │     ├─────┤ ├─────┤     │(ENT/│
+//                             │     │     │     │ │     │     │Neo6)│
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [NEO3] = LAYOUT_ergodox(
     KC_NO,    UC(0xb9),   UC(0xb2), UC(0xb3), UC(0x203a), UC(0x2039), KC_NO,
     KC_LEAD,  UC(0x2026), DE_UNDS,  DE_LBRC,  DE_RBRC,    DE_CIRC,    KC_NO,
     KC_TRNS, DE_BSLS,    DE_SLSH,  DE_LCBR,  DE_RCBR,    DE_ASTR,
-    MO(NEO5), DE_HASH,    DE_DLR,   DE_PIPE,  DE_TILD,    DE_GRV,     KC_NO,
+    KC_TRNS, DE_HASH,    DE_DLR,   DE_PIPE,  DE_TILD,    DE_GRV,     KC_NO,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,
     KC_TRNS,
-    LT(NEO6, KC_SPC), KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS,
 
     KC_NO, UC(0xa2), UC(0xa5), UC(0x201a), UC(0x2018), UC(0x2019), KC_NO,
     KC_NO, DE_EXLM,  DE_LESS,  DE_MORE,    DE_EQL,     DE_AMPR,    KC_NO,
            DE_QST,   DE_LPRN,  DE_RPRN,    DE_MINS,    DE_COLN,    DE_AT,
-    KC_NO, DE_PLUS,  DE_PERC,  DE_DQOT,    DE_QUOT,    DE_SCLN,    KC_NO,
+    KC_NO, DE_PLUS,  DE_PERC,  DE_DQOT,    DE_QUOT,    DE_SCLN,    KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,
     KC_TRNS,
-    KC_TRNS, KC_TRNS, LT(NEO6, KC_ENTER)
+    KC_TRNS, KC_TRNS, KC_TRNS
   ),
 // Layer 4: Neo4
 // ┌───────┬─────┬─────┬─────┬─────┬─────┬─────┐     ┌─────┬─────┬─────┬─────┬─────┬─────┬───────┐
@@ -196,7 +196,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ├───────┼─────┼─────┼─────┼─────┼─────┼─────┤     ├─────┼─────┼─────┼─────┼─────┼─────┼───────┤
 // │   ⇥   │  ⇞  │  ⌫  │  ↑  │  ⌦  │  ⇟  │ --- │     │ --- │  ¡  │  7  │  8  │  9  │  +  │   −   │
 // ├───────┼─────┼─────┼─────╆─────╅─────┤     │     │     ├─────╆─────╅─────┼─────┼─────┼───────┤
-// │ Neo6  │  ⇱  │  ←  │  ↓  │  →  │  ⇲  ├─────┤     ├─────┤  ¿  │  4  │  5  │  6  │  ,  │   .   │
+// │(Neo6) │  ⇱  │  ←  │  ↓  │  →  │  ⇲  ├─────┤     ├─────┤  ¿  │  4  │  5  │  6  │  ,  │   .   │
 // ├───────┼─────┼─────┼─────╄─────╃─────┤ --- │     │ --- ├─────╄─────╃─────┼─────┼─────┼───────┤
 // │ Shift │  ⌧  │  ⇥  │  ⎀  │  ⏎  │ --- │     │     │     │  :  │  1  │  2  │  3  │  ;  │ Shift │
 // └─┬─────┼─────┼─────┼─────┼─────┼─────┴─────┘     └─────┴─────┼─────┼─────┼─────┼─────┼─────┬─┘
@@ -211,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NEO4] = LAYOUT_ergodox(
     KC_NO,    UC(0xaa), UC(0xba), UC(0x2116), KC_NO,     UC(0xb7), KC_NO,
     KC_TAB,   KC_PGUP,  KC_BSPC,  KC_UP,      KC_DEL,    KC_PGDN,  KC_NO,
-    MO(NEO6), KC_HOME,  KC_LEFT,  KC_DOWN,    KC_RIGHT,  KC_END,
+    KC_TRNS, KC_HOME,  KC_LEFT,  KC_DOWN,    KC_RIGHT,  KC_END,
     KC_LSFT,    KC_ESC,   KC_TAB,   KC_INS,     KC_ENTER, KC_NO,    KC_NO,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,
@@ -578,6 +578,29 @@ void keyboard_post_init_user() {
 
 // Runs every time the layer is changed.
 uint32_t layer_state_set_user(uint32_t state) {
+  // Handle Neo5 and Neo6 correctly.
+  // We can't use `update_tri_layer_state` for Neo5, because either of
+  // LSFT and RSFT can be used to enable Neo5 together with Mod-Neo3.
+  uint32_t mask_neo_2_1 = 1 << NEO2_1;
+  uint32_t mask_neo_2_2 = 1 << NEO2_2;
+  uint32_t mask_neo_3 = 1 << NEO3;
+  uint32_t mask_neo_4 = 1 << NEO4;
+  uint32_t mask_neo_5 = 1 << NEO5;
+  uint32_t mask_neo_6 = 1 << NEO6;
+  bool is_neo2_on = (state & mask_neo_2_1) == mask_neo_2_1 || (state & mask_neo_2_2) == mask_neo_2_2;
+  bool is_neo3_on = (state & mask_neo_3) == mask_neo_3;
+  bool is_neo4_on = (state & mask_neo_4) == mask_neo_4;
+  if (is_neo2_on && is_neo3_on) {
+    state |= mask_neo_5;
+  } else {
+    state &= ~mask_neo_5;
+  }
+  if (is_neo3_on && is_neo4_on) {
+    state |= mask_neo_6;
+  } else {
+    state &= ~mask_neo_6;
+  }
+
   uint8_t layer = biton32(state);
   set_layer_matrix_colors(layer);
 
