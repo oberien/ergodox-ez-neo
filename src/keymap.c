@@ -207,7 +207,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO, UC(0xa3), UC(0xa4), KC_TAB,  KC_KP_SLASH, KC_KP_ASTERISK, KC_KP_MINUS,
     KC_NO, UC(0xa1), KC_KP_7,  KC_KP_8, KC_KP_9,     KC_KP_PLUS,     UC(0x2212),
            UC(0xbf), KC_KP_4,  KC_KP_5, KC_KP_6,     KC_KP_COMMA,    KC_KP_DOT,
-    KC_NO, DE_COLN,  KC_KP_1,  KC_KP_2, KC_KP_3,     KC_SCLN,        KC_RSFT,
+    KC_NO, DE_COLN,  KC_KP_1,  KC_KP_2, KC_KP_3,     DE_SCLN,        KC_RSFT,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,
     KC_TRNS,

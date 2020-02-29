@@ -8,6 +8,7 @@ Neo:
 
 - [x] no userland neo layout required
 - [x] supports Caps-Lock via pressing both `Shift` keys at the same time
+- [x] supports lowercase `ß` and uppercase `ẞ`
 - [x] supports Unicode (neo layers 5/6) on Linux via ibus
 - [x] keypad on Layer 4 sends keypad keycodes
 * [x] Num-Lock is always enabled 
