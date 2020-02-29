@@ -79,6 +79,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     return false;
   }
 
+  if (NEO_ALPHA <= keycode && keycode <= NEO_OMEGA) {
+    uint16_t index = keycode - NEO_ALPHA;
+    bool capslock_on = host_keyboard_led_state().caps_lock;
+    uint16_t keycode = pgm_read_word(&GREEK_KEYS[index][capslock_on]);
+    press_or_release_key(keycode, record->event.pressed);
+  }
+
   switch (keycode) {
     case TGL_RGB:
       if (record->event.pressed) {
