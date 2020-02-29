@@ -21,7 +21,21 @@ enum layers {
 };
 
 enum custom_keycodes {
-  TGL_RGB = SAFE_RANGE,
+  // Neo shifted numbers are mapped differently than DE or US, some of them are even unicode characters.
+  // However, with i3-wm, the default is to use Win+Shift+Num to move the active window to workspace Num.
+  // That doesn't work anymore, because the keyboard sends different keys and characters.
+  // Therefore, we define our own keys to send 1-0 if win is pressed and the neo character otherwise.
+  NEO_SFT_1 = SAFE_RANGE,
+  NEO_SFT_2,
+  NEO_SFT_3,
+  NEO_SFT_4,
+  NEO_SFT_5,
+  NEO_SFT_6,
+  NEO_SFT_7,
+  NEO_SFT_8,
+  NEO_SFT_9,
+  NEO_SFT_0,
+  TGL_RGB,
   LT_NEO4_ENTER,
 };
 
@@ -67,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 // Layer 1: Neo2_1 (Shifted by LShift)
 // ┌───────┬─────┬─────┬─────┬─────┬─────┬─────┐     ┌─────┬─────┬─────┬─────┬─────┬─────┬───────┐
-// │       │  °  │  §  │  ℓ  │  »  │  «  │     │     │     │  $  │  €  │  „  │  “  │  ”  │   —   │
+// │       │ 1/° │ 2/§ │ 3/ℓ │ 4/» │ 5/« │     │     │     │ 6/$ │ 7/€ │ 8/„ │ 9/“ │ 0/” │   —   │
 // ├───────┼─────┼─────┼─────┼─────┼─────┼─────┤     ├─────┼─────┼─────┼─────┼─────┼─────┼───────┤
 // │       │     │     │     │     │     │     │     │     │     │     │     │     │     │   ẞ   │
 // ├───────┼─────┼─────┼─────╆─────╅─────┤     │     │     ├─────╆─────╅─────┼─────┼─────┼───────┤
@@ -84,19 +98,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                             │     │     │     │ │     │     │     │
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [NEO2_1] = LAYOUT_ergodox(
-    KC_TRNS, DE_RING, DE_PARA, UC(0x2113), UC(0xbb), UC(0xab), KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,  KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_TRNS, NEO_SFT_1, NEO_SFT_2, NEO_SFT_3, NEO_SFT_4, NEO_SFT_5, KC_TRNS,
+    KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,
+    KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,
+    KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,
     KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS,
 
-    KC_TRNS, DE_DLR,  DE_EURO, UC(0x201e), UC(0x201c), UC(0x201d), UC(0x2014),
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    UC(0x1e9e),
-             KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, UC(0x2013), UC(0x2022), KC_TRNS,    KC_CAPS,
+    KC_TRNS, NEO_SFT_6, NEO_SFT_7, NEO_SFT_8,  NEO_SFT_9,   NEO_SFT_0, UC(0x2014),
+    KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,    KC_TRNS,    KC_TRNS,    UC(0x1e9e),
+             KC_TRNS,   KC_TRNS,   KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
+    KC_TRNS, KC_TRNS,   KC_TRNS,   UC(0x2013), UC(0x2022), KC_TRNS,    KC_CAPS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,
     KC_TRNS,
@@ -104,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 // Layer 2: Neo2_2 (Shifted by RShift)
 // ┌───────┬─────┬─────┬─────┬─────┬─────┬─────┐     ┌─────┬─────┬─────┬─────┬─────┬─────┬───────┐
-// │       │  °  │  §  │  ℓ  │  »  │  «  │     │     │     │  $  │  €  │  „  │  “  │  ”  │   —   │
+// │       │ 1/° │ 2/§ │ 3/ℓ │ 4/» │ 5/« │     │     │     │ 6/$ │ 7/€ │ 8/„ │ 9/“ │ 0/” │   —   │
 // ├───────┼─────┼─────┼─────┼─────┼─────┼─────┤     ├─────┼─────┼─────┼─────┼─────┼─────┼───────┤
 // │       │     │     │     │     │     │     │     │     │     │     │     │     │     │   ẞ   │
 // ├───────┼─────┼─────┼─────╆─────╅─────┤     │     │     ├─────╆─────╅─────┼─────┼─────┼───────┤
@@ -121,20 +135,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                             │     │     │     │ │     │     │     │
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [NEO2_2] = LAYOUT_ergodox(
-    KC_TRNS, DE_RING, DE_PARA, UC(0x2113), UC(0xbb), UC(0xab), KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,  KC_TRNS,
-    KC_CAPS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_TRNS, NEO_SFT_1, NEO_SFT_2, NEO_SFT_3, NEO_SFT_4, NEO_SFT_5, KC_TRNS,
+    KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,
+    KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,
+    KC_CAPS, KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,
     KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS,
 
-    KC_TRNS, DE_DLR,   DE_EURO,  UC(0x201e), UC(0x201c), UC(0x201d), UC(0x2014),
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,   UC(0x1e9e),
-              KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, UC(0x2013), UC(0x2022), KC_TRNS,   KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,
+    KC_TRNS, NEO_SFT_6, NEO_SFT_7, NEO_SFT_8,  NEO_SFT_9,   NEO_SFT_0, UC(0x2014),
+    KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,    KC_TRNS,    KC_TRNS,    UC(0x1e9e),
+             KC_TRNS,   KC_TRNS,   KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
+    KC_TRNS, KC_TRNS,   KC_TRNS,   UC(0x2013), UC(0x2022), KC_TRNS,    KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,
     KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS
@@ -513,6 +527,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     }
   }
   
+  // Win+Shift+Num fix (see custom keycode definition)
+  if (NEO_SFT_1 <= keycode && keycode <= NEO_SFT_0) {
+    uint8_t win_pressed = get_mods() & (MOD_BIT(KC_LGUI) | MOD_BIT(KC_RGUI));
+    uint16_t num_index = keycode-NEO_SFT_1;
+    if (win_pressed) {
+      _Static_assert(KC_1 + 9 == KC_0 && NEO_SFT_1 + 9 == NEO_SFT_0);
+      if (record->event.pressed) {
+        register_code(KC_1 + num_index);
+      } else {
+        unregister_code(KC_1 + num_index);
+      }
+    } else {
+      uint16_t neo2_chars[] = { DE_RING, DE_PARA, UC(0x2113), UC(0xbb), UC(0xab),
+        DE_DLR, DE_EURO, UC(0x201e), UC(0x201c), UC(0x201d) };
+      uint16_t keycode = neo2_chars[num_index];
+      if (QK_UNICODE <= keycode && keycode <= QK_UNICODE_MAX && record->event.pressed) {
+        unicode_input_start();
+        register_hex(keycode & 0x7fff);
+        unicode_input_finish();
+      } else {
+        if (record->event.pressed) {
+          register_code16(keycode);
+        } else {
+          unregister_code16(keycode);
+        }
+      }
+    }
+    return false;
+  }
+
   switch (keycode) {
     case TGL_RGB:
       if (record->event.pressed) {
