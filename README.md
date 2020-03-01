@@ -16,7 +16,7 @@ Neo:
     * required by neo layer 4 keypad
 - [x] sends Win+Shift+(1-0) instead of Win+Neo2 characters to support i3-wm move to workspace
 - [x] on layer 5 writes capital Greek letters if CapsLock is active
-- [ ] switch for supporting userland `de` and `us` keyboard layouts (currently `de` required)
+- [x] button to switch sent keycodes to support both userland `de` and `us` keyboard layouts
 
 QWERTZ / QWERTY:
 

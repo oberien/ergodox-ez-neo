@@ -33,8 +33,8 @@ static bool is_neo4_pressed;
 
 // Runs every matrix scan
 void matrix_scan_user(void) {
-  if (is_neo4_pressed && !IS_LAYER_ON(NEO4) && timer_elapsed(lt_neo4_timer) >= TAPPING_TERM) {
-    layer_on(NEO4);
+  if (is_neo4_pressed && !IS_LAYER_ON(NEO4_DE) && timer_elapsed(lt_neo4_timer) >= TAPPING_TERM) {
+    layer_on(NEO4_DE);
   }
 }
 
@@ -49,7 +49,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       anything_pressed_during_neo4 = false;
       is_neo4_pressed = true;
     } else {
-      layer_off(NEO4);
+      layer_off(NEO4_DE);
       is_neo4_pressed = false;
       if (!anything_pressed_during_neo4 && timer_elapsed(lt_neo4_timer) < TAPPING_TERM) {
         tap_key(KC_ENTER);
@@ -75,9 +75,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       _Static_assert(KC_1 + 9 == KC_0 && NEO_SFT_1 + 9 == NEO_SFT_0, "number key mapping invalid");
       press_or_release_key(KC_1 + num_index, record->event.pressed);
     } else {
-      uint16_t neo2_chars[] = { DE_RING, DE_PARA, UC(0x2113), UC(0xbb), UC(0xab),
-        DE_DLR, DE_EURO, UC(0x201e), UC(0x201c), UC(0x201d) };
-      uint16_t keycode = neo2_chars[num_index];
+      const uint16_t* neo_sft_keys;
+      if (userland_language == DE) {
+        neo_sft_keys = NEO_SFT_KEYS_DE;
+      } else {
+        neo_sft_keys = NEO_SFT_KEYS_US;
+      }
+      uint16_t keycode = pgm_read_word(&neo_sft_keys[num_index]);
       press_or_release_key(keycode, record->event.pressed);
     }
     return false;
@@ -96,6 +100,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         toggle_lighting();
       }
       return false;
+    case TGL_DE_US:
+      if (record->event.pressed) {
+        toggle_userland_language();
+        leds_set_for_userland_language(userland_language);
+      }
+      return false;
     default:
       return true;
   }
@@ -105,37 +115,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 // Runs after all basic initialization is done
 void keyboard_post_init_user(void) {
   rgb_matrix_enable();
-  lighting_set_for_layer(NEO1);
+  lighting_set_for_layer(NEO1_DE);
 }
 
 // Runs every time the layer is changed.
 uint32_t layer_state_set_user(uint32_t state) {
   // Handle Neo5 and Neo6 tri-state correctly.
-  // We can't use `update_tri_layer_state` for Neo5, because either of
-  // LSFT and RSFT can be used to enable Neo5 together with Mod-Neo3.
-  uint32_t mask_neo_2_1 = 1 << NEO2_1;
-  uint32_t mask_neo_2_2 = 1 << NEO2_2;
-  uint32_t mask_neo_3 = 1 << NEO3;
-  uint32_t mask_neo_4 = 1 << NEO4;
-  uint32_t mask_neo_5 = 1 << NEO5;
-  uint32_t mask_neo_6 = 1 << NEO6;
-  bool is_neo2_on = (state & mask_neo_2_1) == mask_neo_2_1 || (state & mask_neo_2_2) == mask_neo_2_2;
-  bool is_neo3_on = (state & mask_neo_3) == mask_neo_3;
-  bool is_neo4_on = (state & mask_neo_4) == mask_neo_4;
-  if (is_neo2_on && is_neo3_on) {
-    state |= mask_neo_5;
-  } else {
-    state &= ~mask_neo_5;
-  }
-  if (is_neo3_on && is_neo4_on) {
-    state |= mask_neo_6;
-  } else {
-    state &= ~mask_neo_6;
-  }
+  // LSFT and RSFT can both be used to enable Neo5 together with Mod-Neo3.
+  state = update_tri_layer_mask_state(state, mask(NEO2_1) | mask(NEO2_2), mask(NEO3_DE), mask(NEO5));
+  state = update_tri_layer_state(state, NEO3_DE, NEO4_DE, NEO6);
+
+  // DE vs US
+  state = update_tri_bool_state(state, userland_language == US, NEO1_US);
+  state = update_tri_layer_mask_bool_state(state, mask(NEO2_1) | mask(NEO2_2), userland_language == US, mask(NEO2_US));
+  state = update_tri_layer_bool_state(state, NEO3_DE, userland_language == US, NEO3_US);
+  state = update_tri_layer_bool_state(state, NEO4_DE, userland_language == US, NEO4_US);
 
   uint8_t layer = biton32(state);
   lighting_set_for_layer(layer);
-  leds_set_for_layer(layer);
   return state;
 };
 

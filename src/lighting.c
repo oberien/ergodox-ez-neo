@@ -14,15 +14,19 @@ void lighting_set_for_layer(uint8_t layer) {
     return;
   }
   switch (layer) {
-    case NEO1:
+    case NEO1_DE:
+    case NEO1_US:
     case NEO2_1:
     case NEO2_2:
+    case NEO2_US:
       set_hsv_layer_color(HSV_BLUE);
       break;
-    case NEO3:
+    case NEO3_DE:
+    case NEO3_US:
       set_hsv_layer_color(HSV_BROWN);
       break;
-    case NEO4:
+    case NEO4_DE:
+    case NEO4_US:
       set_hsv_layer_color(HSV_YELLOW);
       break;
     case NEO5:
@@ -44,7 +48,7 @@ void lighting_set_for_layer(uint8_t layer) {
 
 void toggle_lighting(void) {
   lighting_disabled = !lighting_disabled;
-  lighting_set_for_layer(NEO1);
+  lighting_set_for_layer(NEO1_DE);
 }
 
 void lighting_rgb_matrix_indicators(void) {
@@ -76,42 +80,19 @@ void lighting_rgb_matrix_indicators(void) {
   }
 }
 
-void leds_set_for_layer(uint8_t layer) {
-  ergodox_board_led_off();
-  ergodox_right_led_1_off();
-  ergodox_right_led_2_off();
-
-  switch (layer) {
-    // no LED, but Matrix
-    case NEO1:
-    case NEO2_1:
-    case NEO2_2:
-    case NEO3:
-    case NEO4:
-    case NEO5:
-    case NEO6:
-      break;
-    case QWERTY:
-    case F_MEDIA:
-      ergodox_right_led_1_on();
-      break;
-    case QWERTZ:
-      ergodox_right_led_2_on();
-      break;
-    case STENO:
-      ergodox_right_led_1_on();
-      ergodox_right_led_2_on();
-      break;
-    default:
-      break;
-  }
-}
-
 void leds_set_for_host_indicators(led_t led_state) {
   if (led_state.caps_lock) {
     ergodox_right_led_3_on();
   } else {
     ergodox_right_led_3_off();
+  }
+}
+
+void leds_set_for_userland_language(enum userland_language lang) {
+  if (lang == DE) {
+    ergodox_right_led_2_off();
+  } else {
+    ergodox_right_led_2_on();
   }
 }
 
