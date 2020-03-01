@@ -1,0 +1,75 @@
+diff --git a/tmk_core/common/action.c b/tmk_core/common/action.c
+index 001f0de..0766b24 100644
+--- a/tmk_core/common/action.c
++++ b/tmk_core/common/action.c
+@@ -780,6 +780,13 @@ void register_code(uint8_t code) {
+ */
+ #endif
+             {
++                // Force a new key press if the key is already pressed
++                // without this, keys with the same keycode, but different
++                // modifiers will be reported incorrectly, see issue #1708
++                if (is_key_pressed(keyboard_report, code)) {
++                  del_key(code);
++                  send_keyboard_report();
++                }
+                 add_key(code);
+                 send_keyboard_report();
+             }
+diff --git a/tmk_core/common/report.c b/tmk_core/common/report.c
+index f4758b4..f4cdca7 100644
+--- a/tmk_core/common/report.c
++++ b/tmk_core/common/report.c
+@@ -68,6 +68,32 @@ uint8_t get_first_key(report_keyboard_t* keyboard_report) {
+ #endif
+ }
+ 
++/** \brief Checks if a key is pressed in the report
++ *
++ * Returns true if the keyboard_report reports that the key is pressed, otherwise false
++ * Note: The function doesn't support modifers currently, and it returns false for KC_NO
++ */
++bool is_key_pressed(report_keyboard_t* keyboard_report, uint8_t key) {
++  if (key == KC_NO) {
++    return false;
++  }
++#ifdef NKRO_ENABLE
++  if (keyboard_protocol && keymap_config.nkro) {
++    if ((key>>3) < KEYBOARD_REPORT_BITS) {
++        return keyboard_report->nkro.bits[key>>3] & 1<<(key&7);
++    } else {
++      return false;
++    }
++  }
++#endif
++  for (int i=0; i < KEYBOARD_REPORT_KEYS; i++) {
++      if (keyboard_report->keys[i] == key) {
++          return true;
++      }
++  }
++  return false;
++}
++
+ /** \brief add key byte
+  *
+  * FIXME: Needs doc
+diff --git a/tmk_core/common/report.h b/tmk_core/common/report.h
+index ecd5da8..645e016 100644
+--- a/tmk_core/common/report.h
++++ b/tmk_core/common/report.h
+@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ #define REPORT_H
+ 
+ #include <stdint.h>
++#include <stdbool.h>
+ #include "keycode.h"
+ 
+ /* report id */
+@@ -236,6 +237,7 @@ static inline uint16_t KEYCODE2CONSUMER(uint8_t key) {
+ 
+ uint8_t has_anykey(report_keyboard_t* keyboard_report);
+ uint8_t get_first_key(report_keyboard_t* keyboard_report);
++bool is_key_pressed(report_keyboard_t* keyboard_report, uint8_t key);
+ 
+ void add_key_byte(report_keyboard_t* keyboard_report, uint8_t code);
+ void del_key_byte(report_keyboard_t* keyboard_report, uint8_t code);
