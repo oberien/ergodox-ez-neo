@@ -57,9 +57,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     }
     return false;
   } else {
-    if (is_neo4_pressed && record->event.pressed) {
-      layer_on(NEO4);
+    if (is_neo4_pressed && !anything_pressed_during_neo4 && record->event.pressed) {
+      layer_on(NEO4_DE);
       anything_pressed_during_neo4 = true;
+      // The keycode already got translated with the wrong layer.
+      // Generate the new one and discard the old one.
+      process_record(record);
+      return false;
     }
   }
   
