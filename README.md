@@ -37,6 +37,8 @@ Others:
 * [x] NKRO enabled
 * [x] correct tri layers for neo layers 5/6 (manually implemented, *not* using `update_tri_layer_state`)
 - [x] Applies the [qmk/qmk_firmware#2710](https://github.com/qmk/qmk_firmware/pull/2710) patch to allow rolling <> and similar
+- [ ] Switch between `UC_WIN` and `UC_LNX`
+- [ ] Compose onboard
 
 RGB Matrix / Lighting:
 
