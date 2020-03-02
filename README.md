@@ -20,8 +20,8 @@ Neo:
 
 QWERTZ / QWERTY:
 
-- [ ] qwertz for gaming such that key remapping isn't required for each game
-- [ ] qwerty as option if userland has `us` keyboard layout
+- [x] qwertz for gaming such that key remapping isn't required for each game
+- [x] qwertz / qwerty switch (via same switch to toggle `de` / `us` for neo)
 
 Steno / Plover:
 

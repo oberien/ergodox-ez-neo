@@ -126,6 +126,7 @@ uint32_t layer_state_set_user(uint32_t state) {
   state = update_tri_layer_state(state, NEO3_DE, NEO4_DE, NEO6);
 
   // DE vs US
+  state = update_tri_layer_bool_state(state, QWERTZ, userland_language == US, QWERTY);
   state = update_tri_bool_state(state, userland_language == US, NEO1_US);
   state = update_tri_layer_mask_bool_state(state, mask(NEO2_1) | mask(NEO2_2), userland_language == US, mask(NEO2_US));
   state = update_tri_layer_bool_state(state, NEO3_DE, userland_language == US, NEO3_US);
