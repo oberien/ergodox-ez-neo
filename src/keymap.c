@@ -106,6 +106,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         leds_set_for_userland_language(userland_language);
       }
       return false;
+    case TGL_UC_MODE:
+      if (record->event.pressed) {
+        toggle_unicode_input_mode();
+        leds_set_for_unicode_input_mode(get_unicode_input_mode());
+      }
     default:
       return true;
   }

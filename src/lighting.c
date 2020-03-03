@@ -96,3 +96,10 @@ void leds_set_for_userland_language(enum userland_language lang) {
   }
 }
 
+void leds_set_for_unicode_input_mode(uint8_t mode) {
+  if (mode == UC_LNX) {
+    ergodox_right_led_1_off();
+  } else {
+    ergodox_right_led_1_on();
+  }
+}

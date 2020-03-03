@@ -41,6 +41,15 @@ void toggle_userland_language(void) {
   }
 }
 
+void toggle_unicode_input_mode(void) {
+  // don't persist, so don't use set_unicode_input_mode, which *does* persist
+  if (get_unicode_input_mode() == UC_LNX) {
+    unicode_config.input_mode = UC_WIN;
+  } else {
+    unicode_config.input_mode = UC_LNX;
+  }
+}
+
 enum custom_keycodes {
   // Neo shifted numbers are mapped differently than DE or US, some of them are even unicode characters.
   // However, with i3-wm, the default is to use Win+Shift+Num to move the active window to workspace Num.
@@ -58,6 +67,7 @@ enum custom_keycodes {
   NEO_SFT_0,
   TGL_RGB,
   TGL_DE_US,
+  TGL_UC_MODE,
   LT_NEO4_ENTER,
   NEO_ALPHA,
   NEO_BETA,
@@ -160,10 +170,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,
     KC_SPC, MO(F_MEDIA), KC_NO,
 
-    TGL_RGB,   KC_6, KC_7, KC_8,    KC_9,   KC_0, DE_MINS,
-    TGL_DE_US, KC_K, KC_H, KC_G,    KC_F,   KC_Q, DE_SS,
-               KC_S, KC_N, KC_R,    KC_T,   KC_D, DE_Y,
-    KC_NO,     KC_B, KC_M, KC_COMM, KC_DOT, KC_J, LM(NEO2_2, MOD_LSFT),
+    TGL_RGB,     KC_6, KC_7, KC_8,    KC_9,   KC_0, DE_MINS,
+    TGL_DE_US,   KC_K, KC_H, KC_G,    KC_F,   KC_Q, DE_SS,
+                 KC_S, KC_N, KC_R,    KC_T,   KC_D, DE_Y,
+    TGL_UC_MODE, KC_B, KC_M, KC_COMM, KC_DOT, KC_J, LM(NEO2_2, MOD_LSFT),
     KC_NO, KC_NO, KC_RALT, KC_RGUI, KC_RCTL,
     KC_LEFT, KC_RIGHT,
     KC_NO,
