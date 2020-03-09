@@ -333,7 +333,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ┌───────┬─────┬─────┬─────┬─────┬─────┬─────┐     ┌─────┬─────┬─────┬─────┬─────┬─────┬───────┐
 // │  ---  │  ¹  │  ²  │  ³  │  ›  │  ‹  │ --- │     │ --- │  ¢  │  ¥  │  ‚  │  ‘  │  ’  │  ---  │
 // ├───────┼─────┼─────┼─────┼─────┼─────┼─────┤     ├─────┼─────┼─────┼─────┼─────┼─────┼───────┤
-// │ LEAD  │  …  │  _  │  [  │  ]  │  ^  │ --- │     │ --- │  !  │  <  │  >  │  =  │  &  │  ---  │
+// │COMPOSE│  …  │  _  │  [  │  ]  │  ^  │ --- │     │ --- │  !  │  <  │  >  │  =  │  &  │  ---  │
 // ├───────┼─────┼─────┼─────╆─────╅─────┤     │     │     ├─────╆─────╅─────┼─────┼─────┼───────┤
 // │ XXXXX │  \  │  /  │  {  │  }  │  *  ├─────┤     ├─────┤  ?  │  (  │  )  │  -  │  :  │   @   │
 // ├───────┼─────┼─────┼─────╄─────╃─────┤ --- │     │ --- ├─────╄─────╃─────┼─────┼─────┼───────┤
@@ -348,10 +348,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                             │     │     │     │ │     │     │Neo6)│
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [NEO3_DE] = LAYOUT_ergodox(
-    KC_NO,    UC(0xb9),   UC(0xb2), UC(0xb3), UC(0x203a), UC(0x2039), KC_NO,
-    KC_LEAD,  UC(0x2026), DE_UNDS,  DE_LBRC,  DE_RBRC,    DE_CIRC,    KC_NO,
-    KC_TRNS, DE_BSLS,    DE_SLSH,  DE_LCBR,  DE_RCBR,    DE_ASTR,
-    KC_TRNS, DE_HASH,    DE_DLR,   DE_PIPE,  DE_TILD,    DE_GRV,     KC_NO,
+    KC_NO,     UC(0xb9),   UC(0xb2), UC(0xb3), UC(0x203a), UC(0x2039), KC_NO,
+    KC_COMPOB, UC(0x2026), DE_UNDS,  DE_LBRC,  DE_RBRC,    DE_CIRC,    KC_NO,
+    KC_TRNS,   DE_BSLS,    DE_SLSH,  DE_LCBR,  DE_RCBR,    DE_ASTR,
+    KC_TRNS,   DE_HASH,    DE_DLR,   DE_PIPE,  DE_TILD,    DE_GRV,     KC_NO,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,
     KC_TRNS,

@@ -8,7 +8,7 @@ build/qmk_firmware/keyboards/ergodox_ez/keymaps/neo-oberien: build/qmk_firmware 
 	cp -Tr src build/qmk_firmware/keyboards/ergodox_ez/keymaps/neo-oberien
 
 build/qmk_firmware: build
-	git clone --recurse-submodules --depth 1 https://github.com/zsa/qmk_firmware/ build/qmk_firmware
+	git clone --recurse-submodules --depth 1 https://github.com/oberien/qmk_firmware/ build/qmk_firmware
 	cd build/qmk_firmware && git apply ../../2710.diff
 	sudo pacman -S --needed base-devel gcc unzip wget zip avr-gcc avr-binutils avr-libc dfu-util arm-none-eabi-gcc arm-none-eabi-binutils arm-none-eabi-newlib git dfu-programmer dfu-util
 	pikaur -S --needed zsa-wally

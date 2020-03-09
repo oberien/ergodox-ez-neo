@@ -1,6 +1,7 @@
 #include "my_keymap.h"
 #include "lighting.c"
 #include "helper.c"
+#include "compose.c"
 
 // Run only after EEPROM is reset to initialize it with default values.
 void eeconfig_init_user(void) {
