@@ -13,6 +13,17 @@ void matrix_init_user(void) {
   steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
 }
 
+// Runs after all basic initialization is done
+void keyboard_post_init_user(void) {
+  led_t led_state = host_keyboard_led_state();
+  if (!led_state.num_lock) {
+    tap_key(KC_NUMLOCK);
+  }
+  rgb_matrix_enable();
+  leds_set_for_host_indicators(led_state);
+  lighting_set_for_layer(NEO1_DE);
+}
+
 // Runs when any host led indicator changes (NumLock, CapsLock, ScrollLock, Compose, Kana).
 bool led_update_user(led_t led_state) {
   // neo always requires for NumLock to be enabled for the KeyPad on Layer 4.
@@ -117,12 +128,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   }
 }
 
-
-// Runs after all basic initialization is done
-void keyboard_post_init_user(void) {
-  rgb_matrix_enable();
-  lighting_set_for_layer(NEO1_DE);
-}
 
 // Runs every time the layer is changed.
 uint32_t layer_state_set_user(uint32_t state) {
