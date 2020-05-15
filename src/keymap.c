@@ -11,14 +11,17 @@ void eeconfig_init_user(void) {
 // Run during firmware startup
 void matrix_init_user(void) {
   steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
+  if (!(host_keyboard_leds() & (1<<USB_LED_NUM_LOCK))) {
+      tap_key(KC_NUMLOCK);
+  }
 }
 
 // Runs after all basic initialization is done
 void keyboard_post_init_user(void) {
   led_t led_state = host_keyboard_led_state();
-  if (!led_state.num_lock) {
-    tap_key(KC_NUMLOCK);
-  }
+  /*if (!led_state.num_lock) {*/
+    /*tap_key(KC_NUMLOCK);*/
+  /*}*/
   rgb_matrix_enable();
   leds_set_for_host_indicators(led_state);
   lighting_set_for_layer(NEO1_DE);

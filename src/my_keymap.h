@@ -152,23 +152,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ├───────┼─────┼─────┼─────╄─────╃─────┤ --- │     │ --- ├─────╄─────╃─────┼─────┼─────┼───────┤
 // │Neo2_1 │  Ü  │  Ö  │  Ä  │  P  │  Z  │     │     │     │  B  │  M  │  ,  │  .  │  J  │ Neo2_2│
 // └─┬─────┼─────┼─────┼─────┼─────┼─────┴─────┘     └─────┴─────┼─────┼─────┼─────┼─────┼─────┬─┘
-//   │LCTL │LWin │LALT │ --- │PSCR │                             │ --- │ --- │ RALT│ RWin│ RCTL│
+//   │LCTL │LWin │LALT │ --- │ --- │                             │ --- │ --- │ RALT│ RWin│ RCTL│
 //   └─────┴─────┴─────┴─────┴─────┘ ┌─────┬─────┐ ┌─────┬─────┐ └─────┴─────┴─────┴─────┴─────┘
 //                                   │  ↑  │  ↓  │ │  ←  │  →  │
 //                             ┌─────┼─────┼─────┤ ├─────┼─────┼─────┐
-//                             │     │     │ --- │ │ --- │     │     │
+//                             │     │     │NLCK │ │ --- │     │     │
 //                             │ SPC │Media├─────┤ ├─────┤Media│ ENT/│
-//                             │     │     │ --- │ │ --- │     │ Neo4│
+//                             │     │     │PSCR │ │ --- │     │ Neo4│
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [NEO1_DE] = LAYOUT_ergodox(
     KC_NO,                KC_1,  KC_2,  KC_3,  KC_4, KC_5, TO(STENO),
     KC_TAB,               KC_X,  KC_V,  KC_L,  KC_C, KC_W, TO(QWERTZ),
     MO(NEO3_DE),             KC_U,  KC_I,  KC_A,  KC_E, KC_O,
     LM(NEO2_1, MOD_LSFT), DE_UE, DE_OE, DE_AE, KC_P, DE_Z, KC_NO,
-    KC_LCTL, KC_LGUI, KC_LALT, KC_NO, KC_PSCR,
+    KC_LCTL, KC_LGUI, KC_LALT, KC_NO, KC_NO,
     KC_UP, KC_DOWN,
-    KC_NO,
-    KC_SPC, MO(F_MEDIA), KC_NO,
+    KC_NLCK,
+    KC_SPC, MO(F_MEDIA), KC_PSCR,
 
     TGL_RGB,     KC_6, KC_7, KC_8,    KC_9,   KC_0, DE_MINS,
     TGL_DE_US,   KC_K, KC_H, KC_G,    KC_F,   KC_Q, DE_SS,
@@ -210,10 +210,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // └─┬─────┼─────┼─────┼─────┼─────┼─────┴─────┘     └─────┴─────┼─────┼─────┼─────┼─────┼─────┬─┘
 //   │LCTL │LWin │LAlt │ --- │ --- │                             │ --- │ --- │ RAlt│ RWin│ RCTL│
 //   └─────┴─────┴─────┴─────┴─────┘ ┌─────┬─────┐ ┌─────┬─────┐ └─────┴─────┴─────┴─────┴─────┘
-//                                   │ --- │ --- │ │ --- │ --- │
+//                                   │     │     │ │     │     │
 //                             ┌─────┼─────┼─────┤ ├─────┼─────┼─────┐
 //                             │     │     │ --- │ │ --- │     │     │
-//                             │ SPC │ --- ├─────┤ ├─────┤ --- │ ENT │
+//                             │ SPC │Media├─────┤ ├─────┤Media│ ENT │
 //                             │     │     │ --- │ │ --- │     │     │
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [QWERTZ] = LAYOUT_ergodox(
@@ -222,18 +222,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MO(NEO3_DE), KC_A, KC_S, KC_D, KC_F, KC_G,
     KC_LSFT,     DE_Y, KC_X, KC_C, KC_V, KC_B, KC_NO,
     KC_LCTL, KC_LGUI, KC_LALT, KC_NO, KC_NO,
-    KC_NO, KC_NO,
+    KC_TRNS, KC_TRNS,
     KC_NO,
-    KC_SPC, KC_NO, KC_NO,
+    KC_SPC, MO(F_MEDIA), KC_NO,
 
     KC_NO,   KC_6, KC_7, KC_8,    KC_9,   KC_0,    DE_SS,
     KC_TRNS, DE_Z, KC_U, KC_I,    KC_O,   KC_P,    DE_UE,
              KC_H, KC_J, KC_K,    KC_L,   DE_OE,   DE_AE,
     KC_NO,   KC_N, KC_M, KC_COMM, KC_DOT, DE_MINS, KC_RSFT,
     KC_NO, KC_NO, KC_RALT, KC_RGUI, KC_RCTL,
-    KC_NO, KC_NO,
+    KC_TRNS, KC_TRNS,
     KC_NO,
-    KC_NO, KC_NO, LT_NEO4_ENTER
+    KC_NO, MO(F_MEDIA), LT_NEO4_ENTER
   ),
   [QWERTY] = LAYOUT_ergodox(
     KC_GRAVE, _______, _______, _______, _______, _______, _______,
