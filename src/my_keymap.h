@@ -152,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ├───────┼─────┼─────┼─────╄─────╃─────┤ --- │     │ --- ├─────╄─────╃─────┼─────┼─────┼───────┤
 // │Neo2_1 │  Ü  │  Ö  │  Ä  │  P  │  Z  │     │     │     │  B  │  M  │  ,  │  .  │  J  │ Neo2_2│
 // └─┬─────┼─────┼─────┼─────┼─────┼─────┴─────┘     └─────┴─────┼─────┼─────┼─────┼─────┼─────┬─┘
-//   │LCTL │LWin │LALT │ --- │ --- │                             │ --- │ --- │ RALT│ RWin│ RCTL│
+//   │LCTL │LWin │LALT │ --- │ --- │                             │ --- │ Menu│ RALT│ RWin│ RCTL│
 //   └─────┴─────┴─────┴─────┴─────┘ ┌─────┬─────┐ ┌─────┬─────┐ └─────┴─────┴─────┴─────┴─────┘
 //                                   │  ↑  │  ↓  │ │  ←  │  →  │
 //                             ┌─────┼─────┼─────┤ ├─────┼─────┼─────┐
@@ -174,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TGL_DE_US,   KC_K, KC_H, KC_G,    KC_F,   KC_Q, DE_SS,
                  KC_S, KC_N, KC_R,    KC_T,   KC_D, DE_Y,
     TGL_UC_MODE, KC_B, KC_M, KC_COMM, KC_DOT, KC_J, LM(NEO2_2, MOD_LSFT),
-    KC_NO, KC_NO, KC_RALT, KC_RGUI, KC_RCTL,
+    KC_NO, KC_APP, KC_RALT, KC_RGUI, KC_RCTL,
     KC_LEFT, KC_RIGHT,
     KC_NO,
     KC_NO, MO(F_MEDIA), LT_NEO4_ENTER
