@@ -69,6 +69,9 @@ enum custom_keycodes {
   TGL_DE_US,
   TGL_UC_MODE,
   LT_NEO4_ENTER,
+  // non-dead keys in German layout (presses dead_key + space)
+  ND_CIRC,
+  ND_GRAVE,
   NEO_ALPHA,
   NEO_BETA,
   NEO_GAMMA,
@@ -217,7 +220,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                             │     │     │ --- │ │ --- │     │     │
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [QWERTZ] = LAYOUT_ergodox(
-    DE_CIRC,     KC_1, KC_2, KC_3, KC_4, KC_5, KC_NO,
+    ND_CIRC,     KC_1, KC_2, KC_3, KC_4, KC_5, KC_NO,
     KC_TAB,      KC_Q, KC_W, KC_E, KC_R, KC_T, TO(NEO1_DE),
     MO(NEO3_DE), KC_A, KC_S, KC_D, KC_F, KC_G,
     KC_LSFT,     DE_Y, KC_X, KC_C, KC_V, KC_B, KC_NO,
@@ -348,10 +351,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                             │     │     │     │ │     │     │Neo6)│
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [NEO3_DE] = LAYOUT_ergodox(
-    KC_NO,     UC(0xb9),   UC(0xb2), UC(0xb3), UC(0x203a), UC(0x2039), KC_NO,
-    KC_COMPOB, UC(0x2026), DE_UNDS,  DE_LBRC,  DE_RBRC,    DE_CIRC,    KC_NO,
-    KC_TRNS,   DE_BSLS,    DE_SLSH,  DE_LCBR,  DE_RCBR,    DE_ASTR,
-    KC_TRNS,   DE_HASH,    DE_DLR,   DE_PIPE,  DE_TILD,    DE_GRV,     KC_NO,
+    KC_NO,   UC(0xb9),   UC(0xb2), UC(0xb3), UC(0x203a), UC(0x2039), KC_NO,
+    KC_LEAD, UC(0x2026), DE_UNDS,  DE_LBRC,  DE_RBRC,    ND_CIRC,    KC_NO,
+    KC_TRNS, DE_BSLS,    DE_SLSH,  DE_LCBR,  DE_RCBR,    DE_ASTR,
+    KC_TRNS, DE_HASH,    DE_DLR,   DE_PIPE,  DE_TILD,    ND_GRAVE,   KC_NO,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,
     KC_TRNS,
@@ -367,10 +370,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS
   ),
   [NEO3_US] = LAYOUT_ergodox(
-    _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, KC_UNDS, KC_LBRC, KC_RBRC, KC_CIRC, _______,
+    _______, _______, _______, _______, _______, _______,  _______,
+    _______, _______, KC_UNDS, KC_LBRC, KC_RBRC, KC_CIRC,  _______,
     _______, KC_BSLS, KC_SLSH, KC_LCBR, KC_RCBR, KC_ASTR,
-    _______, KC_HASH, KC_DLR,  KC_PIPE, KC_TILD, KC_GRV,  _______,
+    _______, KC_HASH, KC_DLR,  KC_PIPE, KC_TILD, KC_GRAVE, _______,
     _______, _______, _______, _______, _______,
     _______, _______,
     _______,

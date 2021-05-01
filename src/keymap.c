@@ -1,7 +1,6 @@
 #include "my_keymap.h"
 #include "lighting.c"
 #include "helper.c"
-#include "compose.c"
 
 // Run only after EEPROM is reset to initialize it with default values.
 void eeconfig_init_user(void) {
@@ -126,6 +125,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         toggle_unicode_input_mode();
         leds_set_for_unicode_input_mode(get_unicode_input_mode());
       }
+      return false;
+    case ND_CIRC:
+      if (record->event.pressed) {
+        tap_key(DE_CIRC);
+        tap_key(KC_SPACE);
+      }
+      return false;
+    case ND_GRAVE:
+      if (record->event.pressed) {
+        tap_key(DE_GRV);
+        tap_key(KC_SPACE);
+      }
+      return false;
     default:
       return true;
   }
