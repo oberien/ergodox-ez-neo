@@ -1,6 +1,38 @@
-COMPOSE_ONBOARD_DICTIONARY(
+void leader_start() {
+  ergodox_right_led_1_on();
+}
+void leader_end() {
+  ergodox_right_led_1_off();
+}
+
+LEADER_EXTERNS();
+
+void leader_matrix_scan_user(void) {
+  LEADER_DICTIONARY() {
+    leading = false;
+
     // DIAERESIS
     // ë
+    SEQ_TWO_KEYS(DE_DQOT, KC_E) {
+      tap_key(UC(0xEB));
+      leader_end();
+    } else SEQ_TWO_KEYS(KC_DQUO, KC_E) {
+      tap_key(UC(0xEB));
+      leader_end();
+    } else SEQ_ONE_KEY(KC_E) {
+      tap_key(UC(0xE8));
+      leader_end();
+    } else SEQ_ONE_KEY(DE_DQOT) {
+      SEND_STRING("a");
+      leader_end();
+    } else SEQ_ONE_KEY(MO(NEO3_DE)) {
+      SEND_STRING("b");
+      leader_end();
+    }
+  }
+}
+/*
+COMPOSE_ONBOARD_DICTIONARY(
     COMPOSE_ONBOARD_MAPPING(COMPOSE_ONBOARD_INPUT(DE_DQOT, KC_E), tap_key(UC(0xEB));)
     COMPOSE_ONBOARD_MAPPING(COMPOSE_ONBOARD_INPUT(KC_DQUO, KC_E), tap_key(UC(0xEB));)
     // ï
@@ -58,10 +90,4 @@ COMPOSE_ONBOARD_DICTIONARY(
     // ™
     COMPOSE_ONBOARD_MAPPING(COMPOSE_ONBOARD_INPUT(KC_T, KC_M), tap_key(UC(0x2122));)
 )
-
-void compose_onboard_start() {
-  ergodox_right_led_1_on();
-}
-void compose_onboard_end() {
-  ergodox_right_led_1_off();
-}
+*/

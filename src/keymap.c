@@ -1,6 +1,7 @@
 #include "my_keymap.h"
 #include "lighting.c"
 #include "helper.c"
+//#include "leader.c"
 
 // Run only after EEPROM is reset to initialize it with default values.
 void eeconfig_init_user(void) {
@@ -50,6 +51,7 @@ void matrix_scan_user(void) {
   if (is_neo4_pressed && !IS_LAYER_ON(NEO4_DE) && timer_elapsed(lt_neo4_timer) >= TAPPING_TERM) {
     layer_on(NEO4_DE);
   }
+  //leader_matrix_scan_user();
 }
 
 // Runs when a key is pressed before it is forwarded to qmk.
