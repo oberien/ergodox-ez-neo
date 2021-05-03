@@ -1,6 +1,8 @@
 #include "my_keymap.h"
 #include "lighting.c"
 #include "helper.c"
+#include "neo4lthack.c"
+#include "custom_keys.c"
 //#include "leader.c"
 
 // Run only after EEPROM is reset to initialize it with default values.
@@ -42,107 +44,17 @@ void rgb_matrix_indicators_user(void) {
   lighting_rgb_matrix_indicators();
 }
 
-static uint16_t lt_neo4_timer;
-static bool anything_pressed_during_neo4;
-static bool is_neo4_pressed;
-
 // Runs every matrix scan
 void matrix_scan_user(void) {
-  if (is_neo4_pressed && !IS_LAYER_ON(NEO4_DE) && timer_elapsed(lt_neo4_timer) >= TAPPING_TERM) {
-    layer_on(NEO4_DE);
-  }
+  neo4lthack_matrix_scan_user();
   //leader_matrix_scan_user();
 }
 
 // Runs when a key is pressed before it is forwarded to qmk.
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-  // Change behavour of LT(NEO4, KC_ENTER) to make
-  // Down(LT), Down(6), Up(LT), Up(6) to register as 6.
-  // We needed a custom keycode for this to have perfect responsive lighting.
-  if (keycode == LT_NEO4_ENTER) {
-    if (record->event.pressed) {
-      lt_neo4_timer = timer_read();
-      anything_pressed_during_neo4 = false;
-      is_neo4_pressed = true;
-    } else {
-      layer_off(NEO4_DE);
-      is_neo4_pressed = false;
-      if (!anything_pressed_during_neo4 && timer_elapsed(lt_neo4_timer) < TAPPING_TERM) {
-        tap_key(KC_ENTER);
-      }
-    }
-    return false;
-  } else {
-    if (is_neo4_pressed && !anything_pressed_during_neo4 && record->event.pressed) {
-      layer_on(NEO4_DE);
-      anything_pressed_during_neo4 = true;
-      // The keycode already got translated with the wrong layer.
-      // Generate the new one and discard the old one.
-      process_record(record);
-      return false;
-    }
-  }
-  
-  // Win+Shift+Num fix (see custom keycode definition)
-  if (NEO_SFT_1 <= keycode && keycode <= NEO_SFT_0) {
-    uint8_t win_pressed = get_mods() & (MOD_BIT(KC_LGUI) | MOD_BIT(KC_RGUI));
-    uint16_t num_index = keycode-NEO_SFT_1;
-    if (win_pressed) {
-      _Static_assert(KC_1 + 9 == KC_0 && NEO_SFT_1 + 9 == NEO_SFT_0, "number key mapping invalid");
-      press_or_release_key(KC_1 + num_index, record->event.pressed);
-    } else {
-      const uint16_t* neo_sft_keys;
-      if (userland_language == DE) {
-        neo_sft_keys = NEO_SFT_KEYS_DE;
-      } else {
-        neo_sft_keys = NEO_SFT_KEYS_US;
-      }
-      uint16_t keycode = pgm_read_word(&neo_sft_keys[num_index]);
-      press_or_release_key(keycode, record->event.pressed);
-    }
-    return false;
-  }
-
-  if (NEO_ALPHA <= keycode && keycode <= NEO_OMEGA) {
-    uint16_t index = keycode - NEO_ALPHA;
-    bool capslock_on = host_keyboard_led_state().caps_lock;
-    uint16_t keycode = pgm_read_word(&GREEK_KEYS[index][capslock_on]);
-    press_or_release_key(keycode, record->event.pressed);
-  }
-
-  switch (keycode) {
-    case TGL_RGB:
-      if (record->event.pressed) {
-        toggle_lighting();
-      }
-      return false;
-    case TGL_DE_US:
-      if (record->event.pressed) {
-        toggle_userland_language();
-        leds_set_for_userland_language(userland_language);
-      }
-      return false;
-    case TGL_UC_MODE:
-      if (record->event.pressed) {
-        toggle_unicode_input_mode();
-        leds_set_for_unicode_input_mode(get_unicode_input_mode());
-      }
-      return false;
-    case ND_CIRC:
-      if (record->event.pressed) {
-        tap_key(DE_CIRC);
-        tap_key(KC_SPACE);
-      }
-      return false;
-    case ND_GRAVE:
-      if (record->event.pressed) {
-        tap_key(DE_GRV);
-        tap_key(KC_SPACE);
-      }
-      return false;
-    default:
-      return true;
-  }
+  if (!neo4lthack_process_record_user(keycode, record)) { return false; }
+  if (!custom_keys_process_record_user(keycode, record)) { return false; }
+  return true;
 }
 
 
