@@ -72,6 +72,9 @@ enum custom_keycodes {
   // non-dead keys in German layout (presses dead_key + space)
   ND_CIRC,
   ND_GRAVE,
+  // type the current trackball color
+  TB_STATE,
+  // neo greek characters with capitalization
   NEO_ALPHA,
   NEO_BETA,
   NEO_GAMMA,
@@ -155,20 +158,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ├───────┼─────┼─────┼─────╄─────╃─────┤ --- │     │ --- ├─────╄─────╃─────┼─────┼─────┼───────┤
 // │Neo2_1 │  Ü  │  Ö  │  Ä  │  P  │  Z  │     │     │     │  B  │  M  │  ,  │  .  │  J  │ Neo2_2│
 // └─┬─────┼─────┼─────┼─────┼─────┼─────┴─────┘     └─────┴─────┼─────┼─────┼─────┼─────┼─────┬─┘
-//   │LCTL │LWin │LALT │ --- │ --- │                             │ SCLK│ Menu│ RALT│ RWin│ RCTL│
+//   │LCTL │LWin │LALT │ --- │SCLK │                             │     │ Menu│ RALT│ RWin│ RCTL│
 //   └─────┴─────┴─────┴─────┴─────┘ ┌─────┬─────┐ ┌─────┬─────┐ └─────┴─────┴─────┴─────┴─────┘
 //                                   │  ↑  │  ↓  │ │  ←  │  →  │
 //                             ┌─────┼─────┼─────┤ ├─────┼─────┼─────┐
 //                             │     │     │NLCK │ │ --- │     │     │
 //                             │ SPC │Media├─────┤ ├─────┤Media│ ENT/│
-//                             │     │     │PSCR │ │ --- │     │ Neo4│
+//                             │     │     │PSCR │ │TBSTA│     │ Neo4│
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [NEO1_DE] = LAYOUT_ergodox(
     KC_NO,                KC_1,  KC_2,  KC_3,  KC_4, KC_5, TO(STENO),
     KC_TAB,               KC_X,  KC_V,  KC_L,  KC_C, KC_W, TO(QWERTZ),
     MO(NEO3_DE),             KC_U,  KC_I,  KC_A,  KC_E, KC_O,
     LM(NEO2_1, MOD_LSFT), DE_UE, DE_OE, DE_AE, KC_P, DE_Z, KC_NO,
-    KC_LCTL, KC_LGUI, KC_LALT, KC_NO, KC_NO,
+    KC_LCTL, KC_LGUI, KC_LALT, KC_NO, KC_SLCK,
     KC_UP, KC_DOWN,
     KC_NLCK,
     KC_SPC, MO(F_MEDIA), KC_PSCR,
@@ -177,10 +180,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TGL_DE_US,   KC_K, KC_H, KC_G,    KC_F,   KC_Q, DE_SS,
                  KC_S, KC_N, KC_R,    KC_T,   KC_D, DE_Y,
     TGL_UC_MODE, KC_B, KC_M, KC_COMM, KC_DOT, KC_J, LM(NEO2_2, MOD_LSFT),
-    KC_SLCK, KC_APP, KC_RALT, KC_RGUI, KC_RCTL,
+    KC_NO, KC_APP, KC_RALT, KC_RGUI, KC_RCTL,
     KC_LEFT, KC_RIGHT,
     KC_NO,
-    KC_NO, MO(F_MEDIA), LT_NEO4_ENTER
+    TB_STATE, MO(F_MEDIA), LT_NEO4_ENTER
   ),
   [NEO1_US] = LAYOUT_ergodox(
     _______, _______,  _______,  _______,  _______, _______, _______,

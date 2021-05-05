@@ -1,6 +1,8 @@
+#include <pointing_device.h>
 #include "my_keymap.h"
-#include "lighting.c"
 #include "helper.c"
+#include "trackball.c"
+#include "lighting.c"
 #include "neo4lthack.c"
 #include "custom_keys.c"
 //#include "leader.c"
@@ -48,6 +50,12 @@ void rgb_matrix_indicators_user(void) {
 void matrix_scan_user(void) {
   neo4lthack_matrix_scan_user();
   //leader_matrix_scan_user();
+}
+
+// Runs every keyboard-loop, similar to matrix_scan_user but is used for pointing stuff
+void pointing_device_task(void) {
+  trackball_pointing_device_task();
+  pointing_device_send();
 }
 
 // Runs when a key is pressed before it is forwarded to qmk.

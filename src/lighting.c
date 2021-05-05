@@ -1,4 +1,5 @@
 #define HSV_BROWN 15, 255, 150
+#define RGB_BROWN 150, 37, 0
 #define HSV_BLACK 0, 0, 0
 
 static bool lighting_disabled = false;
@@ -11,6 +12,7 @@ static void set_hsv_layer_color(uint8_t hue, uint8_t sat, uint8_t val) {
 void lighting_set_for_layer(uint8_t layer) {
   if (lighting_disabled) {
     set_hsv_layer_color(HSV_BLACK);
+    trackball_set_color(RGB_BLACK, 0);
     return;
   }
   switch (layer) {
@@ -20,28 +22,35 @@ void lighting_set_for_layer(uint8_t layer) {
     case NEO2_2:
     case NEO2_US:
       set_hsv_layer_color(HSV_BLUE);
+      trackball_set_color(RGB_BLUE, 0);
       break;
     case NEO3_DE:
     case NEO3_US:
       set_hsv_layer_color(HSV_BROWN);
+      trackball_set_color(RGB_BROWN, 0);
       break;
     case NEO4_DE:
     case NEO4_US:
       set_hsv_layer_color(HSV_YELLOW);
+      trackball_set_color(RGB_YELLOW, 0);
       break;
     case NEO5:
       set_hsv_layer_color(HSV_CYAN);
+      trackball_set_color(RGB_CYAN, 0);
       break;
     case NEO6:
       set_hsv_layer_color(HSV_RED);
+      trackball_set_color(RGB_RED, 0);
       break;
     case QWERTZ:
     case QWERTY:
       set_hsv_layer_color(HSV_WHITE);
+      trackball_set_color(0, 0, 0, 255);
       break;
     case F_MEDIA:
     case STENO:
       set_hsv_layer_color(HSV_BLACK);
+      trackball_set_color(RGB_BLACK, 0);
       break;
   }
 }
@@ -70,11 +79,13 @@ void lighting_rgb_matrix_indicators(void) {
       for (int i = 0; i < sizeof(F_MEDIA_SPRINGGREEN_KEYS); i++) {
         rgb_matrix_set_color(F_MEDIA_SPRINGGREEN_KEYS[i], RGB_SPRINGGREEN);
       }
+      trackball_set_color(RGB_GREEN, 0);
       break;
     case STENO:
       for (int i = 0; i < sizeof(STENO_COLORED_KEYS); i++) {
         rgb_matrix_set_color(STENO_COLORED_KEYS[i], RGB_MAGENTA);
       }
+      trackball_set_color(RGB_MAGENTA, 0);
     default:
       return;
   }

@@ -1,3 +1,26 @@
+int32_t max(int32_t x, int32_t y) {
+  return x > y ? x : y;
+}
+int32_t min(int32_t x, int32_t y) {
+  return x < y ? x : y;
+}
+
+char hex_char(uint8_t x) {
+  x = x & 0x0f;
+  if (x <= 0x9) {
+    return x + '0';
+  } else {
+    return x - 10 + 'A';
+  }
+}
+
+void send_hex(uint8_t x) {
+  char str[] = "XX";
+  str[0] = hex_char(x>>4);
+  str[1] = hex_char(x>>0);
+  send_string(str);
+}
+
 static bool is_unicode(uint16_t keycode) {
   return QK_UNICODE <= keycode && keycode <= QK_UNICODE_MAX;
 }
