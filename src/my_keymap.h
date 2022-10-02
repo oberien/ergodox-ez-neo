@@ -73,7 +73,7 @@ enum custom_keycodes {
   ND_CIRC,
   ND_GRAVE,
   // type the current trackball color
-  TB_STATE,
+  //TB_STATE,
   // neo greek characters with capitalization
   NEO_ALPHA,
   NEO_BETA,
@@ -164,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                             ┌─────┼─────┼─────┤ ├─────┼─────┼─────┐
 //                             │     │     │NLCK │ │ --- │     │     │
 //                             │ SPC │Media├─────┤ ├─────┤Media│ ENT/│
-//                             │     │     │PSCR │ │TBSTA│     │ Neo4│
+//                             │     │     │PSCR │ │KLOCK│     │ Neo4│
 //                             └─────┴─────┴─────┘ └─────┴─────┴─────┘
   [NEO1_DE] = LAYOUT_ergodox(
     KC_NO,                KC_1,  KC_2,  KC_3,  KC_4, KC_5, TO(STENO),
@@ -183,7 +183,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO, KC_APP, KC_RALT, KC_RGUI, KC_RCTL,
     KC_LEFT, KC_RIGHT,
     KC_NO,
-    TB_STATE, MO(F_MEDIA), LT_NEO4_ENTER
+    //TB_STATE, MO(F_MEDIA), LT_NEO4_ENTER
+    KC_LOCK, MO(F_MEDIA), LT_NEO4_ENTER
   ),
   [NEO1_US] = LAYOUT_ergodox(
     _______, _______,  _______,  _______,  _______, _______, _______,
@@ -214,7 +215,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ├───────┼─────┼─────┼─────╄─────╃─────┤ --- │     │ --- ├─────╄─────╃─────┼─────┼─────┼───────┤
 // │ LSFT  │  Y  │  X  │  C  │  V  │  B  │     │     │     │  N  │  M  │  ,  │  .  │  -  │  RSFT │
 // └─┬─────┼─────┼─────┼─────┼─────┼─────┴─────┘     └─────┴─────┼─────┼─────┼─────┼─────┼─────┬─┘
-//   │LCTL │LWin │LAlt │LAlt │LAlt │                             │ --- │ --- │ RAlt│ RWin│ RCTL│
+//   │LCTL │LWin │LAlt │LAlt │LAlt │                             │KLOCK│ --- │ RAlt│ RWin│ RCTL│
 //   └─────┴─────┴─────┴─────┴─────┘ ┌─────┬─────┐ ┌─────┬─────┐ └─────┴─────┴─────┴─────┴─────┘
 //                                   │     │     │ │     │     │
 //                             ┌─────┼─────┼─────┤ ├─────┼─────┼─────┐
@@ -239,7 +240,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO, KC_NO, KC_RALT, KC_RGUI, KC_RCTL,
     KC_TRNS, KC_TRNS,
     KC_NO,
-    KC_NO, MO(F_MEDIA), LT_NEO4_ENTER
+    KC_LOCK, MO(F_MEDIA), LT_NEO4_ENTER
   ),
   [QWERTY] = LAYOUT_ergodox(
     KC_GRAVE, _______, _______, _______, _______, _______, _______,

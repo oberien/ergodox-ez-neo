@@ -32,15 +32,15 @@ void trackball_set_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t white
 
 static bool send_next_state = false;
 
-void trackball_send_state(void) {
-  uint8_t data[4];
-  recv(REG_LED_RED, data, 4);
-  send_hex(data[0]);
-  send_hex(data[1]);
-  send_hex(data[2]);
-  send_hex(data[3]);
-  send_next_state = !send_next_state;
-}
+/*void trackball_send_state(void) {*/
+  /*uint8_t data[4];*/
+  /*recv(REG_LED_RED, data, 4);*/
+  /*send_hex(data[0]);*/
+  /*send_hex(data[1]);*/
+  /*send_hex(data[2]);*/
+  /*send_hex(data[3]);*/
+  /*send_next_state = !send_next_state;*/
+/*}*/
 
 static uint16_t timer = 0;
 

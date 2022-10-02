@@ -45,11 +45,11 @@ bool custom_keys_process_record_user(uint16_t keycode, keyrecord_t* record) {
         leds_set_for_unicode_input_mode(get_unicode_input_mode());
       }
       return false;
-    case TB_STATE:
-      if (record->event.pressed) {
-        trackball_send_state();
-      }
-      return false;
+    /*case TB_STATE:*/
+      /*if (record->event.pressed) {*/
+        /*trackball_send_state();*/
+      /*}*/
+      /*return false;*/
     case ND_CIRC:
       if (record->event.pressed) {
         tap_key(DE_CIRC);
